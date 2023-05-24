@@ -1,0 +1,47 @@
+name: compute
+version: 1.0.0
+kind: ecu # Executable Code Unit
+
+dependencies:
+  - python3
+  - python3-yaml
+
+install:
+  - apt update -y && apt upgrade -y
+  - apt install pipenv -y
+
+files:
+  - Pipfile
+  - __init__.py
+  - run.py
+
+unpack:
+  - pipenv install --system --deploy
+
+entrypoint:
+  kind: task
+  exec: run.py
+
+actions:
+  'first_row':
+    command:
+      capture: marked
+      args:
+        - first_row
+    input:
+      - type: IntermediateResult
+        name: filepath
+    output:
+      - type: string
+        name: output
+  'second_row':
+    command:
+      capture: marked
+      args:
+        - second_row
+    input:
+      - type: IntermediateResult
+        name: filepath
+    output:
+      - type: string
+        name: output

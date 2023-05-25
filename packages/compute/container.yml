@@ -1,22 +1,23 @@
 name: compute
-version: 1.0.0
+version: 1.0.2
 kind: ecu # Executable Code Unit
 
 dependencies:
   - python3
   - python3-yaml
+  - python3-pip
 
 install:
   - apt update -y && apt upgrade -y
-  - apt install pipenv -y
 
 files:
-  - Pipfile
+  - requirements.txt
   - __init__.py
   - run.py
+  - wawa.py
 
 unpack:
-  - pipenv install --system --deploy
+  - pip install -r requirements.txt
 
 entrypoint:
   kind: task
@@ -25,7 +26,6 @@ entrypoint:
 actions:
   'first_row':
     command:
-      capture: marked
       args:
         - first_row
     input:
@@ -36,12 +36,24 @@ actions:
         name: output
   'second_row':
     command:
-      capture: marked
       args:
         - second_row
     input:
       - type: IntermediateResult
         name: filepath
+    output:
+      - type: string
+        name: output
+
+  'give_row':
+    command:
+      args:
+        - give_row
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: int
+        name: row
     output:
       - type: string
         name: output

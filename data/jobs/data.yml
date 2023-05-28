@@ -1,0 +1,8 @@
+# FROM EXAMPLE ON GIT
+
+name: job_data
+
+# This is the real magic: we tell Brane we mean this file
+access:
+  kind: file
+  path: ./data

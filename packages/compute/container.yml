@@ -24,20 +24,10 @@ entrypoint:
   exec: run.py
 
 actions:
-  'first_row':
+  'compute_and_visualize':
     command:
       args:
-        - first_row
-    input:
-      - type: IntermediateResult
-        name: filepath
-    output:
-      - type: string
-        name: output
-  'second_row':
-    command:
-      args:
-        - second_row
+        - compute_and_visualize
     input:
       - type: IntermediateResult
         name: filepath
@@ -45,15 +35,3 @@ actions:
       - type: string
         name: output
 
-  'give_row':
-    command:
-      args:
-        - give_row
-    input:
-      - type: IntermediateResult
-        name: filepath
-      - type: int
-        name: row
-    output:
-      - type: string
-        name: output

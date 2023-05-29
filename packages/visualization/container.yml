@@ -14,7 +14,7 @@ files:
   - requirements.txt
   - __init__.py
   - run.py
-  - compute.py
+  - visualize.py
 
 unpack:
   - pip install -r requirements.txt
@@ -30,7 +30,7 @@ actions:
         - visualize
     input:
       - type: IntermediateResult
-        name: filepath
+        name: input
     output:
       - type: IntermediateResult
         name: output

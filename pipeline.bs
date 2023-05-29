@@ -1,0 +1,22 @@
+// PIPELINE
+// Based on work by Tim Müller, Andrea Marino and Jingye Wang.
+
+
+import compute;
+import visualization;
+
+
+// Change this location according to your instance
+on "localhost" {
+    
+    println("Computing...")
+    // !!! TODO: job_data might have to be split for coli.csv and dataset.csv, then passed as 2 arguments
+    let dataframe := compute(new Data{ name := "job_data"}
+
+    println("Generating graphs...")
+    let graphs := visualize(dataframe)
+    
+
+    // !!! TODO: Output graphs somehow
+    return
+}

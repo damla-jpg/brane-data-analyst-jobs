@@ -1,25 +1,16 @@
 #!/usr/bin/python3
 
-import json
-import os
 import pandas as pd
 import sys
 import compute
-import visualize
-
-def give_row(dataset_path: str, row: int):
-  df = pd.read_csv(f"{dataset_path}/dataset.csv")
-  print(f'output: "{df.head(row).tail(1)}"')
-  return
-
 
 def main():
   command = sys.argv[1]
 
-  if command == "compute_and_visualize":
+  if command == "compute":
     dataset = compute.compute()
-    somegraph = visualize.visualize(dataset)
-    print(f'output:"first: {somegraph}"')
+    # !!! TODO: Find a way to output the dataframe as text in a way we can decode it in visualize.py (base64?)
+    print(f'output:"{dataset}"')
     return
 
   # if command == "second_row":

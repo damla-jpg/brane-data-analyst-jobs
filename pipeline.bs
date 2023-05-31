@@ -1,0 +1,34 @@
+// PIPELINE
+// Based on work by Tim Müller, Andrea Marino and Jingye Wang.
+
+
+import compute;
+import visualization;
+
+
+// Change this location according to your instance
+on "localhost" {
+    
+    // println("Computing...");
+    // // !!! TODO: job_data might have to be split for coli.csv and dataset.csv, then passed as 2 arguments
+    // let msg := compute();
+    // println("Computed!");
+    // println(msg);
+
+    println("Cleaning data...");
+    let cleaned := clean_data(new Data { name := "job_data" });
+    commit_result("cleaned_data", cleaned);
+    // dataset can be found under ~/.local/share/brane/data/cleaned_data/data/dataset.csv
+    println("Cleaned!");
+
+    println("Processing data...");
+    let processed := process_data(cleaned, new Data { name := "job_data" });
+    commit_result("processed_data", processed);
+    println("Processed!");
+    
+
+    // Visualization
+    let vis := visualize(processed);
+    commit_result("visualization", vis);
+    return;
+}

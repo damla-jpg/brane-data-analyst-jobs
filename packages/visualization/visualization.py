@@ -10,6 +10,7 @@ import seaborn as sns
 colors = sns.color_palette('Blues_d')[0:6]
 matplotlib.rcParams['figure.facecolor'] = 'white'
 
+# taken from the example project
 def fig_to_base64(fig):
     """
     Convert the figure to base64 string

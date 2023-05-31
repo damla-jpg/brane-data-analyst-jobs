@@ -5,6 +5,9 @@ import numpy as np
 import json
 import os
 
+def hihi(path):
+    return f"hihi says {path}"
+
 def compute():
     pd.options.mode.chained_assignment = None
     dataset = pd.read_csv(f"{json.loads(os.environ['FILEPATH'])}/dataset.csv")
@@ -24,7 +27,9 @@ def compute():
     return output
 
 # generic data cleaning
-def clean_data(df):
+def clean_data(df_path):
+    df = pd.read_csv(f'{df_path}/dataset.csv')
+
     df.drop(df.columns[0], axis=1, inplace=True)
     df['Salary Estimate'] = df['Salary Estimate'].apply(lambda x: x.split('(')[0])
     df.fillna("Not Available", inplace=True)
@@ -32,7 +37,10 @@ def clean_data(df):
     df["Size"] = df["Size"].apply(lambda x: x.split('employees')[0])
     df["Size"] = df["Size"].apply(lambda x: x.replace(" to ", "-"))
     df["Type of ownership"] = df["Type of ownership"].apply(lambda x: "Unknown" if x == "-1" else x)
-    return df
+
+    new_path = '/result/dataset.csv'
+    df.to_csv(new_path)
+    return new_path
 
 # helper function for data cleaning to extract the state
 def get_state(x):

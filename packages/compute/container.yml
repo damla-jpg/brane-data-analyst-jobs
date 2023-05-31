@@ -24,14 +24,36 @@ entrypoint:
   exec: run.py
 
 actions:
-  'visualize':
+  'compute':
     command:
       args:
-        - visualize
+        - compute
+    input:
+      - type: IntermediateResult
+        name: filepath
+    output:
+      - type: string
+        name: message
+    
+  'clean_data':
+    command:
+      args:
+        - clean_data
     input:
       - type: IntermediateResult
         name: filepath
     output:
       - type: IntermediateResult
-        name: output
+        name: filepath
+
+  'hihi':
+    command:
+      args:
+        - hihi
+    input:
+      - type: IntermediateResult
+        name: filepath
+    output:
+      - type: IntermediateResult
+        name: hello
 

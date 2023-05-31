@@ -3,7 +3,7 @@
 
 
 import compute;
-import visualization;
+// import visualization;
 
 
 // Change this location according to your instance
@@ -11,10 +11,17 @@ on "localhost" {
     
     println("Computing...");
     // !!! TODO: job_data might have to be split for coli.csv and dataset.csv, then passed as 2 arguments
-    let dataframe := compute(new Data{ name := "job_data"};
+    let msg := compute();
+    println("Computed!");
+    println(msg);
 
-    println("Generating graphs...")
-    let graphs := visualize(dataframe);
+    println("Cleaning data...");
+    let cleaned := clean_data(new Data { name := "job_data" });
+    println("Cleaned!");
+    println(cleaned);
+
+    // println("Generating graphs...")
+    // let graphs := visualize(dataframe);
     
 
     // !!! TODO: Output graphs somehow

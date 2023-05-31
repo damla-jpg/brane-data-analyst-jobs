@@ -47,15 +47,3 @@ actions:
     output:
       - type: IntermediateResult
         name: filepath
-
-  'hihi':
-    command:
-      args:
-        - hihi
-    input:
-      - type: IntermediateResult
-        name: filepath
-    output:
-      - type: IntermediateResult
-        name: hello
-

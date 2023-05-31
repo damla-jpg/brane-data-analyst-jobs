@@ -7,6 +7,7 @@ description: ""
 dependencies:
   - python3
   - python3-yaml
+  - python3-pip
 
 install:
   - apt update && apt upgrade -y 
@@ -27,9 +28,8 @@ entrypoint:
   exec: run.py
 
 actions:
-  visualization_action:
+  'visualization_action':
     command:
-      capture: marked
       args:
         - visualization_action
     input:

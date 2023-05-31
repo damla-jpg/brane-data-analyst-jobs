@@ -10,6 +10,7 @@ import seaborn as sns
 colors = sns.color_palette('Blues_d')[0:6]
 matplotlib.rcParams['figure.facecolor'] = 'white'
 
+# taken from the example project
 def fig_to_base64(fig):
     """
     Convert the figure to base64 string
@@ -34,7 +35,7 @@ def fig_to_base64(fig):
 
 def plot_salary_estimate(data: pd.DataFrame, store_file=False) -> str:
     fig = plt.figure(figsize=(15, 6))
-    data["Salary Estimate"].value_counts().plot(kind='bar')
+    data["Salary"].value_counts().plot(kind='bar')
     plt.xticks(rotation=90)
     plt.title("Salary Estimate Distribution")
 
@@ -43,30 +44,27 @@ def plot_salary_estimate(data: pd.DataFrame, store_file=False) -> str:
                     dpi=300, bbox_inches="tight")
     return fig_to_base64(fig)
 
-def plot_box_adjusted_by_state(data: pd.DataFrame, store_file=False) -> str:
-    data = data[data["State"].isin(["NY", "CA", "FL", "IL", "TX", "PA", "NC", "WA", "CO"])]
-    unique_states = data["State"].unique()
-    num_states = len(unique_states)
+def plot_box_adjusted_by_loc(data: pd.DataFrame, store_file=False) -> str:
+    unique_locations = data["Location"].unique()
+    num_loc = len(unique_locations)
 
-
-    colors = plt.cm.get_cmap('Set3', num_states)
+    colors = plt.cm.get_cmap('Set3', num_loc)
     fig, ax = plt.subplots(figsize=(12, 6))
-    boxplot = ax.boxplot([data[data["State"] == state]["Adjusted salary"] for state in unique_states], patch_artist=True)
+    boxplot = ax.boxplot([data[data["Location"] == loc]["Adjusted salary"] for loc in unique_locations], patch_artist=True)
 
     # Assign a different color to each boxplot
-    for patch, color in zip(boxplot['boxes'], colors(range(num_states))):
+    for patch, color in zip(boxplot['boxes'], colors(range(num_loc))):
         patch.set_facecolor(color)
 
-    ax.set_title("Adjusted salary by state")
+    ax.set_title("Adjusted salary by location")
     ax.set_ylabel("Adjusted salary")
-    ax.set_xlabel("State")
-    ax.set_xticklabels(unique_states)
+    ax.set_xlabel("Location")
+    ax.set_xticklabels(unique_locations, rotation=90)
     if(store_file):
-        plt.savefig("/result/adjusted_salary_by_state.png",
+        plt.savefig("/result/adjusted_salary_by_loc.png",
                     dpi=300, bbox_inches="tight")
     return fig_to_base64(fig)
 
-# get the average rating for each state
 def plot_average_per_column(df, col, col2, color):
     avg = {}
     for i in df[col].unique():
@@ -84,14 +82,14 @@ def plot_average_per_column(df, col, col2, color):
     plt.ylabel("Average " + col2)
     return fig
 
-def plot_average_rating_by_state(data: pd.DataFrame, store_file=False) -> str:
-    avg_rating_per_state = plot_average_per_column(data, "State", "Rating", colors[0])
+def plot_average_rating_by_loc(data: pd.DataFrame, store_file=False) -> str:
+    avg_rating_per_loc = plot_average_per_column(data, "Location", "Rating", colors[0])
 
     if(store_file):
-        plt.savefig("/result/average_rating_per_state.png",
+        plt.savefig("/result/average_rating_per_loc.png",
                     dpi=300, bbox_inches="tight")
         
-    return fig_to_base64(avg_rating_per_state)
+    return fig_to_base64(avg_rating_per_loc)
 
 def plot_average_rating_by_industry(data: pd.DataFrame, store_file=False) -> str:
     avg_rating_ownership = plot_average_per_column(data, "Type of ownership", "Rating", colors[1])
@@ -102,32 +100,14 @@ def plot_average_rating_by_industry(data: pd.DataFrame, store_file=False) -> str
         
     return fig_to_base64(avg_rating_ownership)
 
-def plot_average_salary_by_state(data: pd.DataFrame, store_file=False) -> str:
-    avg_salary_per_state = plot_average_per_column(data, "State", "Salary", colors[2])
+def plot_average_adjusted_salary_by_loc(data: pd.DataFrame, store_file=False) -> str:
+    avg_adjusted_salary_per_loc = plot_average_per_column(data, "Location", "Adjusted salary", colors[4])
 
     if(store_file):
-        plt.savefig("/result/average_salary_per_state.png",
+        plt.savefig("/result/average_adjusted_salary_per_loc.png",
                     dpi=300, bbox_inches="tight")
         
-    return fig_to_base64(avg_salary_per_state)
-    
-def plot_average_salary_by_industry(data: pd.DataFrame, store_file=False) -> str:
-    avg_salary_ownership = plot_average_per_column(data, "Type of ownership", "Salary", colors[3])
-
-    if(store_file):
-        plt.savefig("/result/average_salary_per_industry.png",
-                    dpi=300, bbox_inches="tight")
-        
-    return fig_to_base64(avg_salary_ownership)
-
-def plot_average_adjusted_salary_by_state(data: pd.DataFrame, store_file=False) -> str:
-    avg_adjusted_salary_per_state = plot_average_per_column(data, "State", "Adjusted salary", colors[4])
-
-    if(store_file):
-        plt.savefig("/result/average_adjusted_salary_per_state.png",
-                    dpi=300, bbox_inches="tight")
-        
-    return fig_to_base64(avg_adjusted_salary_per_state)
+    return fig_to_base64(avg_adjusted_salary_per_loc)
 
 def plot_average_adjusted_salary_by_industry(data: pd.DataFrame, store_file=False) -> str:
     avg_adjusted_salary_per_ownership = plot_average_per_column(data, "Type of ownership", "Adjusted salary", colors[5])
@@ -137,12 +117,3 @@ def plot_average_adjusted_salary_by_industry(data: pd.DataFrame, store_file=Fals
                     dpi=300, bbox_inches="tight")
         
     return fig_to_base64(avg_adjusted_salary_per_ownership)
-
-def generate_salary_estimate_plot(
-        filepath_dataset: str) -> str:
-
-    data_analyst_jobs = pd.read_csv(filepath_dataset)
-
-    plot_salary_estimate(data_analyst_jobs, True)
-
-    return "salary_estimate.png"

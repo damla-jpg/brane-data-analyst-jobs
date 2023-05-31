@@ -11,10 +11,9 @@ import pandas as pd
 import json
 # import yaml
 
-from visualization import (generate_salary_estimate_plot, plot_salary_estimate, 
-                           plot_box_adjusted_by_state, plot_average_rating_by_state,
-                           plot_average_rating_by_industry, plot_average_salary_by_state,
-                           plot_average_salary_by_industry, plot_average_adjusted_salary_by_state,
+from visualization import (plot_salary_estimate, 
+                           plot_box_adjusted_by_loc, plot_average_rating_by_loc,
+                           plot_average_rating_by_industry, plot_average_adjusted_salary_by_loc,
                            plot_average_adjusted_salary_by_industry)
 
 # def print_output(data: dict):
@@ -60,23 +59,19 @@ def visualization_action(
 
 
     salary_estimate_img = plot_salary_estimate(data_analyst_jobs)
-    adjusted_salary_img = plot_box_adjusted_by_state(data_analyst_jobs)
-    average_rating_by_state_img = plot_average_rating_by_state(data_analyst_jobs)
+    adjusted_salary_img = plot_box_adjusted_by_loc(data_analyst_jobs)
+    average_rating_by_loc_img = plot_average_rating_by_loc(data_analyst_jobs)
     average_rating_by_industry_img = plot_average_rating_by_industry(data_analyst_jobs)
-    average_salary_by_state_img = plot_average_salary_by_state(data_analyst_jobs)
-    average_salary_by_industry_img = plot_average_salary_by_industry(data_analyst_jobs)
-    average_adjusted_salary_by_state_img = plot_average_adjusted_salary_by_state(data_analyst_jobs)
+    average_adjusted_salary_by_loc_img = plot_average_adjusted_salary_by_loc(data_analyst_jobs)
     average_adjusted_salary_by_industry_img = plot_average_adjusted_salary_by_industry(data_analyst_jobs)
     template_html = codecs.open("packages/visualization/result.html", "r", "utf-8")
 
     result = template_html.read().format(
         salary_estimate=salary_estimate_img,
-        adjusted_by_state=adjusted_salary_img,
-        average_rating_by_state=average_rating_by_state_img,
+        adjusted_by_loc=adjusted_salary_img,
+        average_rating_by_loc=average_rating_by_loc_img,
         average_rating_by_industry=average_rating_by_industry_img,
-        average_salary_by_state=average_salary_by_state_img,
-        average_salary_by_industry=average_salary_by_industry_img,
-        average_adjusted_salary_by_state=average_adjusted_salary_by_state_img,
+        average_adjusted_salary_by_loc=average_adjusted_salary_by_loc_img,
         average_adjusted_salary_by_industry=average_adjusted_salary_by_industry_img)
 
     try:

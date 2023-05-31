@@ -1,0 +1,58 @@
+name: visualization
+version: 1.0.0
+kind: ecu # Executable Code Unit
+
+description: ""
+
+dependencies:
+  - python3
+  - python3-yaml
+
+install:
+  - apt update && apt upgrade -y 
+  - apt install -y pipenv
+
+files:
+  - Pipfile
+  - Pipfile.lock
+  - run.py
+  - __init__.py
+  - visualization.py
+  - result.html
+
+postinstall:
+  - pipenv install --system --deploy
+
+entrypoint:
+  kind: task
+  exec: run.py
+
+actions:
+  visualization_action:
+    command:
+      capture: marked
+      args:
+        - visualization_action
+    input:
+      - type: IntermediateResult
+        name: filepath
+    output:
+      - type: string
+        name: output
+  
+
+  generate_salary_estimate_plot:
+    command:
+      capture: marked
+      args:
+        - generate_prediction_plot
+    input:
+    input:
+      - type: IntermediateResult
+        name: filepath
+    output:
+      - type: IntermediateResult
+        name: output
+
+
+ 

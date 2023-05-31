@@ -9,7 +9,6 @@ import sys
 def run_action(cmd, filepath):
   return {
     "clean_data": compute.clean_data,
-    "hihi": compute.hihi
   }[cmd](filepath)
 
 
@@ -21,7 +20,7 @@ def main():
     # !!! TODO: Find a way to output the dataframe as text in a way we can decode it in visualize.py (base64?)
     return "IT WORKS!"
 
-  filepath_out = run_action(command, json.loads(os.environ['FILEPATH']))
+  run_action(command, json.loads(os.environ['FILEPATH']))
   # if command == "second_row":
   #   df = pd.read_csv(f"{json.loads(os.environ['FILEPATH'])}/dataset.csv")
   #   print(f'output: "second: {df.head(2).tail(1)}"')

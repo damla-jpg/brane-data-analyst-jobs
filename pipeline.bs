@@ -9,16 +9,18 @@ import compute;
 // Change this location according to your instance
 on "localhost" {
     
-    println("Computing...");
-    // !!! TODO: job_data might have to be split for coli.csv and dataset.csv, then passed as 2 arguments
-    let msg := compute();
-    println("Computed!");
-    println(msg);
+    // println("Computing...");
+    // // !!! TODO: job_data might have to be split for coli.csv and dataset.csv, then passed as 2 arguments
+    // let msg := compute();
+    // println("Computed!");
+    // println(msg);
 
     println("Cleaning data...");
     let cleaned := clean_data(new Data { name := "job_data" });
+    commit_result("cleaned_data", cleaned);
+    // dataset can be found under ~/.local/share/brane/data/cleaned_data/data/dataset.csv
     println("Cleaned!");
-    println(cleaned);
+    // println(cleaned);
 
     // println("Generating graphs...")
     // let graphs := visualize(dataframe);

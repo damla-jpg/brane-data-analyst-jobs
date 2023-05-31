@@ -5,8 +5,6 @@ import numpy as np
 import json
 import os
 
-def hihi(path):
-    return f"hihi says {path}"
 
 def compute():
     pd.options.mode.chained_assignment = None

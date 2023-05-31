@@ -1,5 +1,5 @@
 #!/bin/bash
-#taken from the example project
+#taken from the example project for ease of building
 
 target=$1
 

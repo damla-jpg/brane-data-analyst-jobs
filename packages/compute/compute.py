@@ -6,12 +6,10 @@ import json
 import os
 
 
-def compute():
+def compute(data_path, coli_path):
     pd.options.mode.chained_assignment = None
-    dataset = pd.read_csv(f"{json.loads(os.environ['FILEPATH'])}/dataset.csv")
-    coli = pd.read_csv(f"{json.loads(os.environ['FILEPATH'])}/coli.csv")
-
-    dataset = clean_data(dataset)
+    dataset = pd.read_csv(data_path)
+    coli = pd.read_csv(f"{coli_path}/coli.csv")
 
     dataset['State'] = dataset['Location'].apply(get_state)
     dataset['City'] = dataset['Location'].apply(lambda x: x.split(',')[0])
@@ -20,9 +18,11 @@ def compute():
     dataset['Salary'] = dataset['Salary Estimate'].apply(get_salary_range)
 
     dataset = account_for_coli(dataset)
+    result = dataset[['Location', 'Salary', 'Cost of Living Index', 'Adjusted salary']]
 
-    output = dataset[['Location', 'Salary', 'Cost of Living Index', 'Adjusted salary']]
-    return output
+    new_path = '/result/output.csv'
+    result.to_csv(new_path)
+    return new_path
 
 # generic data cleaning
 def clean_data(df_path):

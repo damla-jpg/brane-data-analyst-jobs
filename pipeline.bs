@@ -20,7 +20,12 @@ on "localhost" {
     commit_result("cleaned_data", cleaned);
     // dataset can be found under ~/.local/share/brane/data/cleaned_data/data/dataset.csv
     println("Cleaned!");
-    // println(cleaned);
+
+    println("Processing data...");
+    let processed := process_data(cleaned, new Data { name := "job_data" });
+    commit_result("processed_data", processed);
+    println("Processed!");
+    
 
     // println("Generating graphs...")
     // let graphs := visualize(dataframe);

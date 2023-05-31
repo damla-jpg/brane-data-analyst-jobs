@@ -24,16 +24,18 @@ entrypoint:
   exec: run.py
 
 actions:
-  'compute':
+  'process_data':
     command:
       args:
-        - compute
+        - process_data
     input:
       - type: IntermediateResult
-        name: filepath
+        name: filepath_data
+      - type: IntermediateResult
+        name: filepath_coli
     output:
-      - type: string
-        name: message
+      - type: IntermediateResult
+        name: filepath
     
   'clean_data':
     command:

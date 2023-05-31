@@ -14,7 +14,7 @@ files:
   - requirements.txt
   - __init__.py
   - run.py
-  - wawa.py
+  - compute.py
 
 unpack:
   - pip install -r requirements.txt
@@ -24,14 +24,38 @@ entrypoint:
   exec: run.py
 
 actions:
-  'compute_and_visualize':
+  'process_data':
     command:
       args:
-        - compute_and_visualize
+        - process_data
+    input:
+      - type: IntermediateResult
+        name: filepath_data
+      - type: IntermediateResult
+        name: filepath_coli
+    output:
+      - type: IntermediateResult
+        name: filepath
+    
+  'clean_data':
+    command:
+      args:
+        - clean_data
     input:
       - type: IntermediateResult
         name: filepath
     output:
-      - type: string
-        name: output
+      - type: IntermediateResult
+        name: filepath
+
+  'hihi':
+    command:
+      args:
+        - hihi
+    input:
+      - type: IntermediateResult
+        name: filepath
+    output:
+      - type: IntermediateResult
+        name: hello
 

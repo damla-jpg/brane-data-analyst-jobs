@@ -8,7 +8,7 @@ import os
 
 def compute(data_path, coli_path):
     pd.options.mode.chained_assignment = None
-    dataset = pd.read_csv(data_path)
+    dataset = pd.read_csv(f"{data_path}/dataset.csv")
     coli = pd.read_csv(f"{coli_path}/coli.csv")
 
     dataset['State'] = dataset['Location'].apply(get_state)

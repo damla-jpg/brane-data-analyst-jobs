@@ -21,7 +21,7 @@ def compute():
 
     dataset = account_for_coli(dataset)
 
-    output = dataset[['Location', 'Salary', 'Cost of Living Index', 'Adjusted salary']]
+    output = dataset[['Location', 'Type of ownership', 'Rating', 'Salary', 'Cost of Living Index', 'Adjusted salary']]
     return output
 
 # generic data cleaning

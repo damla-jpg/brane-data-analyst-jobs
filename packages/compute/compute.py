@@ -20,7 +20,7 @@ def compute(data_path, coli_path):
     dataset = account_for_coli(dataset)
     result = dataset[['Location', 'Type of ownership', 'Rating', 'Salary', 'Cost of Living Index', 'Adjusted salary']]
 
-    new_path = '/result/output.csv'
+    new_path = '/result/dataset.csv'
     result.to_csv(new_path)
     return new_path
 

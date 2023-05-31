@@ -28,7 +28,7 @@ on "localhost" {
     
 
     // Visualization
-    let vis := visualize(processed);
+    let vis := visualization_action(processed);
     commit_result("visualization", vis);
     return;
 }

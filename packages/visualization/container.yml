@@ -11,7 +11,6 @@ dependencies:
 
 install:
   - apt update && apt upgrade -y 
-  - apt install -y pipenv
 
 files:
   - run.py
@@ -21,7 +20,7 @@ files:
   - requirements.txt
 
 postinstall:
-  - pipenv install --system --deploy
+  - pip install -r requirements.txt
 
 entrypoint:
   kind: task

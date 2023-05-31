@@ -55,7 +55,6 @@ def visualization_action(
     -------
     `int` Error code.
     """
-    # print("Visualization action")
     data_analyst_jobs = pd.read_csv(filepath_data_analyst_jobs,
                            converters={"tokens": ast.literal_eval})
 
@@ -81,9 +80,9 @@ def visualization_action(
         average_adjusted_salary_by_industry=average_adjusted_salary_by_industry_img)
 
     try:
-        with open("packages/visualization/result.html", "w") as f:
+        with open("/result/result.html", "w") as f:
             f.write(result)
-        return "packages/visualization/result.html"
+        return "/result/result.html"
     except IOError as e:
         return ""
 
@@ -92,18 +91,8 @@ def main():
     command = sys.argv[1]
 
     if command == "visualization_action":
-        filepath_data_analyst_jobs = f"data/jobs/data/cleaned_data.csv"
-
-        output = visualization_action(
-            filepath_data_analyst_jobs)
-        # print_output({"output": output})
-        return
-
-    if command == "generate_prediction_plot":
-        filepath_data_analyst_jobs = f"{json.loads(os.environ['FILEPATH'])}/cleaned_data.csv"
-        output = generate_salary_estimate_plot(
-            filepath_data_analyst_jobs)
-        # print_output({"output": output})
+        filepath_data_analyst_jobs = f"{json.loads(os.environ['FILEPATH'])}/dataset.csv"
+        output = visualization_action(filepath_data_analyst_jobs)
         return
     
 if __name__ == '__main__':

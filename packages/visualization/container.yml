@@ -13,12 +13,11 @@ install:
   - apt install -y pipenv
 
 files:
-  - Pipfile
-  - Pipfile.lock
   - run.py
   - __init__.py
   - visualization.py
   - result.html
+  - requirements.txt
 
 postinstall:
   - pipenv install --system --deploy
@@ -37,22 +36,7 @@ actions:
       - type: IntermediateResult
         name: filepath
     output:
-      - type: string
-        name: output
-  
-
-  generate_salary_estimate_plot:
-    command:
-      capture: marked
-      args:
-        - generate_prediction_plot
-    input:
-    input:
-      - type: IntermediateResult
-        name: filepath
-    output:
       - type: IntermediateResult
         name: output
-
 
  

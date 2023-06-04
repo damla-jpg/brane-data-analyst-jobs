@@ -1,0 +1,38 @@
+name: panda-branes
+version: 1.0.0
+kind: ecu # Executable Code Unit
+
+dependencies:
+  - python3
+  - python3-yaml
+  - python3-pip
+
+install:
+  - apt update -y && apt upgrade -y
+
+files:
+  - __init__.py
+  - requirements.txt
+  - run.py
+  - panda-branes.py
+
+unpack:
+  - pip install -r requirements.txt
+
+entrypoint:
+  kind: task
+  exec: run.py
+
+actions:
+  'process_data':
+    command:
+      args:
+        - process_data
+    input:
+      - type: IntermediateResult
+        name: filepath_data
+      - type: IntermediateResult
+        name: filepath_coli
+    output:
+      - type: IntermediateResult
+        name: filepath

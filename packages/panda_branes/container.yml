@@ -1,5 +1,5 @@
-name: panda-branes
-version: 1.0.0
+name: panda_branes
+version: 2.0.0
 kind: ecu # Executable Code Unit
 
 dependencies:
@@ -14,7 +14,7 @@ files:
   - __init__.py
   - requirements.txt
   - run.py
-  - panda-branes.py
+  - panda_branes.py
 
 unpack:
   - pip install -r requirements.txt
@@ -24,15 +24,22 @@ entrypoint:
   exec: run.py
 
 actions:
-  'process_data':
+  'hello_world':
     command:
       args:
-        - process_data
+        - hello_world
+    input:
+    output:
+      - type: string
+        name: output
+
+  'get_columns':
+    command:
+      args:
+        - get_columns
     input:
       - type: IntermediateResult
-        name: filepath_data
-      - type: IntermediateResult
-        name: filepath_coli
-    output:
-      - type: IntermediateResult
         name: filepath
+    output:
+      - type: string
+        name: output

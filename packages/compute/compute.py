@@ -10,6 +10,7 @@ def compute():
     pd.options.mode.chained_assignment = None
     dataset = pd.read_csv(f"{json.loads(os.environ['FILEPATH'])}/dataset.csv")
     coli = pd.read_csv(f"{json.loads(os.environ['FILEPATH'])}/coli.csv")
+    us_sdr = pd.read_excel('US SDR 2021 - Database.xlsx', sheet_name='US State SDR 2021 Data')
 
     dataset = clean_data(dataset)
 
@@ -21,7 +22,10 @@ def compute():
 
     dataset = account_for_coli(dataset)
 
-    output = dataset[['Location', 'Type of ownership', 'Rating', 'Salary', 'Cost of Living Index', 'Adjusted salary']]
+    dataset = dataset.merge(us_sdr[['abbrv', 'overall_rank']], how='left', left_on='State', right_on='abbrv')
+    dataset = account_for_sdr(dataset)
+
+    output = dataset[['Location', 'Type of ownership', 'Rating', 'Salary', 'Cost of Living Index', 'Adjusted salary', 'Combined rank']]
     return output
 
 # generic data cleaning
@@ -61,4 +65,14 @@ def account_for_coli(df):
     # make a new column, salary adjusted for cost of living
     df['Adjusted salary'] = df['Salary'] / df['Cost of Living Index']
     df['Adjusted salary'] = df['Adjusted salary'].astype(int)
+    return df
+
+def account_for_sdr(df):
+    df['Adjusted salary rank'] = df['Adjusted salary'].rank(ascending=False)
+
+    df['Adjusted salary rank'] = df['Adjusted salary rank'] / df['Adjusted salary rank'].max()
+
+    df['Combined rank'] = df['Adjusted salary rank'] + df['overall_rank']
+
+    df = df.sort_values(by=['Combined rank'], ascending=True)
     return df

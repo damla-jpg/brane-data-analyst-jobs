@@ -7,6 +7,8 @@ println(cols);
 println(" ");
 
 // drop columns
+// NOTE: Untitled:0 is the index column automatically created by pandas
+// We can't drop it for some reason :|
 let drop_list := "[Job Title, Job Description]";
 let data_dropped := drop_columns(data, [drop_list]);
 let cols_after_drop := columns(data_dropped);

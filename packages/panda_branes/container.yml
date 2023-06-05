@@ -361,10 +361,10 @@ actions:
       - type: IntermediateResult
         name: filepath
 
-  'exec_func':
+  'exec_custom':
     command:
       args:
-        - exec_func
+        - exec_custom
     input:
       - type: IntermediateResult
         name: filepath

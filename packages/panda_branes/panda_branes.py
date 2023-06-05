@@ -189,7 +189,7 @@ def query_and_save(data_path: str, query: str):
     df.to_csv(new_path)
     return new_path
 
-def exec_func(data_path: str, func: str):
+def exec_custom(data_path: str, func: str):
     df = pd.read_csv(f'{data_path}/dataset.csv')
     exec(func)
     new_path = '/result/dataset.csv'

@@ -18,8 +18,7 @@ def main():
 
   if command == "compute_and_visualize":
     dataset = compute.compute()
-    somegraph = visualize.visualize(dataset)
-    print(f'output:"first: {somegraph}"')
+    # print(f'output:"first: {somegraph}"')
     return
 
   # if command == "second_row":

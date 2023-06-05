@@ -117,3 +117,26 @@ def plot_average_adjusted_salary_by_industry(data: pd.DataFrame, store_file=Fals
                     dpi=300, bbox_inches="tight")
         
     return fig_to_base64(avg_adjusted_salary_per_ownership)
+
+def plot_average_combined_rank_per_location(data: pd.DataFrame, store_file=False) -> str:
+    avg_combined_rank_per_loc = plot_average_per_column(data, "Location", "Combined rank", colors[2])
+
+    if(store_file):
+        plt.savefig("/result/average_combined_rank_per_loc.png",
+                    dpi=300, bbox_inches="tight")
+        
+    return fig_to_base64(avg_combined_rank_per_loc)
+
+def plot_adjutsed_and_rank(data: pd.DataFrame, store_file=False) -> str:
+    df = data[['Adjusted salary', 'Combined rank']]
+    plt.figure(figsize=(15, 6))
+    plt.scatter(df['Adjusted salary'], df['Combined rank'])
+    plt.title("Adjusted salary vs Combined rank")
+    plt.xlabel("Adjusted salary")
+    plt.ylabel("Combined rank")
+    
+    if(store_file):
+        plt.savefig("/result/adjusted_salary_vs_combined_rank.png",
+                    dpi=300, bbox_inches="tight")
+        
+    return fig_to_base64(plt)

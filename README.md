@@ -1,4 +1,6 @@
 # brane-data-analyst-jobs
+## Requires
+[brane](https://github.com/epi-project/brane)
 
 ## Building
 ```
@@ -12,7 +14,9 @@ brane data build <path_to_data.yml>
 
 Build the code that executes the data
 ```
-brane build <path_to_container.yml>
+brane build <path_to_container.yml>  # builds packages individually
+OR
+./build.sh    # builds all 3 packages
 ```
 
 ## Testing

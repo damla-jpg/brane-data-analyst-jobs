@@ -1,5 +1,5 @@
 name: compute
-version: 1.0.2
+version: 3.0.0
 kind: ecu # Executable Code Unit
 
 dependencies:
@@ -30,9 +30,7 @@ actions:
         - process_data
     input:
       - type: IntermediateResult
-        name: filepath_data
-      - type: IntermediateResult
-        name: filepath_coli
+        name: filepath
     output:
       - type: IntermediateResult
         name: filepath

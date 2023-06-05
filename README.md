@@ -55,7 +55,7 @@ brane data build ./data/jobs/data.yml
 brane build ./packages/compute/container.yml
 brane test compute
 OR
-brane test -s /home/radu/.docker/desktop/docker.sock compute
+brane test -s /home/copied/path/to/docker.sock compute
 ```
 
 One liner:

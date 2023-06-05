@@ -27,6 +27,15 @@ elif [[ $target == "visualization" ]]; then
         echo "Build visualization package failed, please check the error message!"
         exit 1
     fi
+elif [[ $target == "panda_branes" ]]; then
+    echo "---- Start Build The PandaBranes Package ----"
+    cd packages/panda_branes
+    brane build ./container.yml
+    retVal=$?
+    if [ $retVal -ne 0 ]; then
+        echo "Build PandaBranes package failed, please check the error message!"
+        exit 1
+    fi
 else
     echo "---- Start Build All The Package ----"
     cd packages/compute
@@ -43,6 +52,14 @@ else
     retVal=$?
     if [ $retVal -ne 0 ]; then
         echo "Build visualization package failed, please check the error message!"
+        exit 1
+    fi
+
+    cd ../panda_branes
+    brane build ./container.yml
+    retVal=$?
+    if [ $retVal -ne 0 ]; then
+        echo "Build PandaBranes package failed, please check the error message!"
         exit 1
     fi
 fi

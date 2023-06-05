@@ -1,0 +1,397 @@
+name: panda_branes
+version: 3.0.0
+kind: ecu # Executable Code Unit
+
+dependencies:
+  - python3
+  - python3-yaml
+  - python3-pip
+
+install:
+  - apt update -y && apt upgrade -y
+
+files:
+  - requirements.txt
+  - __init__.py
+  - run.py
+  - panda_branes.py
+
+unpack:
+  - pip install -r requirements.txt
+
+entrypoint:
+  kind: task
+  exec: run.py
+
+actions:
+  'hello_world':
+    command:
+      args:
+        - hello_world
+    input:
+    output:
+      - type: string
+        name: output
+
+  'shape':
+    command:
+      args:
+        - shape
+    input:
+      - type: IntermediateResult
+        name: filepath
+    output:
+      - type: string
+        name: output
+
+  'dtypes':
+    command:
+      args:
+        - dtypes
+    input:
+      - type: IntermediateResult
+        name: filepath
+    output:
+      - type: string
+        name: output
+
+  'columns':
+    command:
+      args:
+        - columns
+    input:
+      - type: IntermediateResult
+        name: filepath
+    output:
+      - type: string
+        name: output
+
+  'index':
+    command:
+      args:
+        - index
+    input:
+      - type: IntermediateResult
+        name: filepath
+    output:
+      - type: string
+        name: output
+
+  'describe':
+    command:
+      args:
+        - describe
+    input:
+      - type: IntermediateResult
+        name: filepath
+    output:
+      - type: string
+        name: output
+
+  'head':
+    command:
+      args:
+        - head
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # int
+        name: parameters
+    output:
+      - type: string
+        name: output
+
+  'tail':
+    command:
+      args:
+        - tail
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # int
+        name: parameters
+    output:
+      - type: string
+        name: output
+
+  'loc':
+    command:
+      args:
+        - loc
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # int, string
+        name: parameters
+    output:
+      - type: string
+        name: output
+
+  'iloc':
+    command:
+      args:
+        - iloc
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # int, int
+        name: parameters
+    output:
+      - type: string
+        name: output
+
+  'describe_column':
+    command:
+      args:
+        - describe_column
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # string
+        name: parameters
+    output:
+      - type: string
+        name: output
+
+  'get_row':
+    command:
+      args:
+        - get_row
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # int
+        name: parameters
+    output:
+      - type: string
+        name: output
+
+  'get_column':
+    command:
+      args:
+        - get_column
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # string
+        name: parameters
+    output:
+      - type: string
+        name: output
+
+  'get_column_value_counts':
+    command:
+      args:
+        - get_column_value_counts
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # string
+        name: parameters
+    output:
+      - type: string
+        name: output
+
+  'query':
+    command:
+      args:
+        - query
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # string
+        name: parameters
+    output:
+      - type: string
+        name: output
+
+  'sort_index':
+    command:
+      args:
+        - sort_index
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # int, bool
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'sort_values':
+    command:
+      args:
+        - sort_values
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # string, int, bool
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'drop_row':
+    command:
+      args:
+        - drop_row
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # int
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'drop_columns':
+    command:
+      args:
+        - drop_columns
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # list
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'keep_columns':
+    command:
+      args:
+        - keep_columns
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # list
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'drop_duplicates':
+    command:
+      args:
+        - drop_duplicates
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # string
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'dropna':
+    command:
+      args:
+        - dropna
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # int
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'fillna':
+    command:
+      args:
+        - fillna
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # string, int
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'replace':
+    command:
+      args:
+        - replace
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # string, string
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'cast_column':
+    command:
+      args:
+        - cast_column
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # string, string
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'rename_column':
+    command:
+      args:
+        - rename_column
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # string, dict
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'query_and_save':
+    command:
+      args:
+        - query_and_save
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # string
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'exec_custom':
+    command:
+      args:
+        - exec_custom
+    input:
+      - type: IntermediateResult
+        name: filepath
+      - type: '[string]' # string, string(function)
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'concat':
+    command:
+      args:
+        - concat
+    input:
+      - type: '[string]' # string, string, int
+        name: filepaths
+    output:
+      - type: IntermediateResult
+        name: filepath
+
+  'merge':
+    command:
+      args:
+        - merge
+    input:
+      - type: '[string]' # string, string, list, list, string
+        name: parameters
+    output:
+      - type: IntermediateResult
+        name: filepath

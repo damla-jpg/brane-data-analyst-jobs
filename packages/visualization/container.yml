@@ -1,8 +1,6 @@
 name: visualization
-version: 1.0.0
+version: 3.0.0
 kind: ecu # Executable Code Unit
-
-description: ""
 
 dependencies:
   - python3
@@ -11,17 +9,16 @@ dependencies:
 
 install:
   - apt update && apt upgrade -y 
-  - apt install -y pipenv
 
 files:
-  - run.py
-  - __init__.py
-  - visualization.py
-  - result.html
   - requirements.txt
+  - result.html
+  - __init__.py
+  - run.py
+  - visualization.py
 
 postinstall:
-  - pipenv install --system --deploy
+  - pip install -r requirements.txt
 
 entrypoint:
   kind: task

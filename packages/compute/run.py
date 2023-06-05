@@ -16,7 +16,7 @@ def main():
   command = sys.argv[1]
 
   if command == "process_data":
-    dataset = compute.compute(f"{json.loads(os.environ['FILEPATH_DATA'])}", f"{json.loads(os.environ['FILEPATH_COLI'])}")
+    dataset = compute.compute(f"{json.loads(os.environ['FILEPATH'])}")
     return
 
   run_action(command, json.loads(os.environ['FILEPATH']))

@@ -67,7 +67,7 @@ def visualization_action(
     average_adjusted_salary_by_industry_img = plot_average_adjusted_salary_by_industry(data_analyst_jobs)
     average_combined_rank_per_location_img = plot_average_combined_rank_per_location(data_analyst_jobs)
     adjusted_and_rank_img = plot_adjutsed_and_rank(data_analyst_jobs)
-    template_html = codecs.open("packages/visualization/result.html", "r", "utf-8")
+    template_html = codecs.open("./result.html", "r", "utf-8")
 
     result = template_html.read().format(
         salary_estimate=salary_estimate_img,

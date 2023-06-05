@@ -30,9 +30,7 @@ actions:
         - process_data
     input:
       - type: IntermediateResult
-        name: filepath_data
-      - type: IntermediateResult
-        name: filepath_coli
+        name: filepath
     output:
       - type: IntermediateResult
         name: filepath

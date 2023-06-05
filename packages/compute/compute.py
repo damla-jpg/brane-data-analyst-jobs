@@ -6,13 +6,13 @@ import json
 import os
 
 
-def compute(data_path, coli_path):
+def compute(data_path):
     pd.options.mode.chained_assignment = None
     dataset = pd.read_csv(f"{data_path}/dataset.csv")
     coli = pd.read_csv(f"{data_path}/coli.csv")
     us_sdr = pd.read_csv(f"{data_path}/us_sdr.csv")
 
-    dataset = clean_data(dataset)
+    # dataset = clean_data(dataset)
 
     dataset['State'] = dataset['Location'].apply(get_state)
     dataset['City'] = dataset['Location'].apply(lambda x: x.split(',')[0])
@@ -34,6 +34,11 @@ def compute(data_path, coli_path):
 # generic data cleaning
 def clean_data(df_path):
     df = pd.read_csv(f'{df_path}/dataset.csv')
+    coli = pd.read_csv(f"{df_path}/coli.csv")
+    us_sdr = pd.read_csv(f"{df_path}/us_sdr.csv")
+
+    coli.to_csv('/result/coli.csv')
+    us_sdr.to_csv('/result/us_sdr.csv')
 
     df.drop(df.columns[0], axis=1, inplace=True)
     df['Salary Estimate'] = df['Salary Estimate'].apply(lambda x: x.split('(')[0])

@@ -1,5 +1,5 @@
 name: compute
-version: 2.0.0
+version: 3.0.0
 kind: ecu # Executable Code Unit
 
 dependencies:

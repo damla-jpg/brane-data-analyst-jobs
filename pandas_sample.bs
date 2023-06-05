@@ -31,7 +31,7 @@ println(" ");
 
 // exec func
 let custom := "df['City'] = df['Location'].apply(lambda x: x.split(',')[0])";
-let after_exec := exec_func(renamed, [custom]);
+let after_exec := exec_custom(renamed, [custom]);
 let cols_after_exec := columns(after_exec);
 println("Columns after exec");
 println(cols_after_exec);

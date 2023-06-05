@@ -1,5 +1,5 @@
 name: panda_branes
-version: 2.0.0
+version: 3.0.0
 kind: ecu # Executable Code Unit
 
 dependencies:
@@ -11,8 +11,8 @@ install:
   - apt update -y && apt upgrade -y
 
 files:
-  - __init__.py
   - requirements.txt
+  - __init__.py
   - run.py
   - panda_branes.py
 

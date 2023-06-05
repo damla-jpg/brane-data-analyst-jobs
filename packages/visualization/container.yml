@@ -1,8 +1,6 @@
 name: visualization
-version: 2.0.0
+version: 3.0.0
 kind: ecu # Executable Code Unit
-
-description: ""
 
 dependencies:
   - python3
@@ -13,11 +11,11 @@ install:
   - apt update && apt upgrade -y 
 
 files:
-  - run.py
-  - __init__.py
-  - visualization.py
-  - result.html
   - requirements.txt
+  - result.html
+  - __init__.py
+  - run.py
+  - visualization.py
 
 postinstall:
   - pip install -r requirements.txt

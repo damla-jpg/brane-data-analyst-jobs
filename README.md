@@ -22,7 +22,12 @@ brane test <package_name>
 then use arrow keys and enter to select your preferred option
 
 ## Running
-*TODO*
+After building the packages:
+```bash
+brane run pipeline.bs   # requires visualization and compute
+OR
+brane run pandas_sample.bs  # requires panda_branes
+```
 
 ## Errors
 ### Docker sock not found

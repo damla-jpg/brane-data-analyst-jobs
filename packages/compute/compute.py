@@ -22,7 +22,7 @@ def compute():
 
     dataset = account_for_coli(dataset)
 
-    dataset = dataset.merge(us_sdr[['abbrv', 'overall_rank']], how='left', left_on='State', right_on='abbrv')
+    dataset = dataset.merge(us_sdr[['abbrv', 'overall_score']], how='left', left_on='State', right_on='abbrv')
     dataset = account_for_sdr(dataset)
 
     output = dataset[['Location', 'Type of ownership', 'Rating', 'Salary', 'Cost of Living Index', 'Adjusted salary', 'Combined rank']]
@@ -68,11 +68,13 @@ def account_for_coli(df):
     return df
 
 def account_for_sdr(df):
-    df['Adjusted salary rank'] = df['Adjusted salary'].rank(ascending=False)
+    df['Adjusted salary rank'] = df['Adjusted salary'].rank(ascending=True)
 
     df['Adjusted salary rank'] = df['Adjusted salary rank'] / df['Adjusted salary rank'].max()
-
-    df['Combined rank'] = df['Adjusted salary rank'] + df['overall_rank']
+    
+    df['overall_score'] = df['overall_score'] / 100
+    
+    df['Combined rank'] = 0.5* df['Adjusted salary rank'] + 0.5*df['overall_score']
 
     df = df.sort_values(by=['Combined rank'], ascending=True)
     return df

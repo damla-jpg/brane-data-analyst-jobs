@@ -14,7 +14,8 @@ import json
 from visualization import (plot_salary_estimate, 
                            plot_box_adjusted_by_loc, plot_average_rating_by_loc,
                            plot_average_rating_by_industry, plot_average_adjusted_salary_by_loc,
-                           plot_average_adjusted_salary_by_industry)
+                           plot_average_adjusted_salary_by_industry, plot_average_combined_rank_per_location,
+                           plot_adjutsed_and_rank)
 
 # def print_output(data: dict):
 #     """
@@ -64,7 +65,9 @@ def visualization_action(
     average_rating_by_industry_img = plot_average_rating_by_industry(data_analyst_jobs)
     average_adjusted_salary_by_loc_img = plot_average_adjusted_salary_by_loc(data_analyst_jobs)
     average_adjusted_salary_by_industry_img = plot_average_adjusted_salary_by_industry(data_analyst_jobs)
-    template_html = codecs.open("./result.html", "r", "utf-8")
+    average_combined_rank_per_location_img = plot_average_combined_rank_per_location(data_analyst_jobs)
+    adjusted_and_rank_img = plot_adjutsed_and_rank(data_analyst_jobs)
+    template_html = codecs.open("packages/visualization/result.html", "r", "utf-8")
 
     result = template_html.read().format(
         salary_estimate=salary_estimate_img,
@@ -72,7 +75,9 @@ def visualization_action(
         average_rating_by_loc=average_rating_by_loc_img,
         average_rating_by_industry=average_rating_by_industry_img,
         average_adjusted_salary_by_loc=average_adjusted_salary_by_loc_img,
-        average_adjusted_salary_by_industry=average_adjusted_salary_by_industry_img)
+        average_adjusted_salary_by_industry=average_adjusted_salary_by_industry_img,
+        average_combined_rank_per_location=average_combined_rank_per_location_img,
+        adjusted_and_rank=adjusted_and_rank_img)
 
     try:
         with open("/result/result.html", "w") as f:

@@ -1,0 +1,40 @@
+import panda_branes;
+
+let data := new Data { name := "job_data" };
+let cols := columns(data);
+println("Initial columns");
+println(cols);
+println(" ");
+
+// drop columns
+let drop_list := "[Job Title, Job Description]";
+let data_dropped := drop_columns(data, [drop_list]);
+let cols_after_drop := columns(data_dropped);
+println("Columns after drop");
+println(cols_after_drop);
+println(" ");
+
+// rename columns
+let rename_dict := "{\"Salary Estimate\": \"s_est\"}";
+let renamed := rename_column(data_dropped, [rename_dict]);
+let cols_after_rename := columns(renamed);
+println("Columns after rename");
+println(cols_after_rename);
+println(" ");
+
+// get column
+let column := "Location";
+let col := get_column(renamed, [column]);
+println("Column");
+println(col);
+println(" ");
+
+// exec func
+let custom := "df['City'] = df['Location'].apply(lambda x: x.split(',')[0])";
+let after_exec := exec_func(renamed, [custom]);
+let cols_after_exec := columns(after_exec);
+println("Columns after exec");
+println(cols_after_exec);
+println(" ");
+
+return;

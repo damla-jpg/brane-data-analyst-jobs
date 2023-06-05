@@ -123,9 +123,16 @@ def drop_row(data_path: str, row: int):
     df.to_csv(new_path)
     return new_path
 
-def drop_column(data_path: str, column_name: str):
+def drop_columns(data_path: str, column_names: list):
     df = pd.read_csv(f'{data_path}/dataset.csv')
-    df = df.drop(columns=column_name)
+    df = df.drop(columns=column_names)
+    new_path = '/result/dataset.csv'
+    df.to_csv(new_path)
+    return new_path
+
+def keep_columns(data_path: str, column_names: list):
+    df = pd.read_csv(f'{data_path}/dataset.csv')
+    df = df[column_names]
     new_path = '/result/dataset.csv'
     df.to_csv(new_path)
     return new_path
@@ -166,9 +173,9 @@ def cast_column(data_path: str, column_name: str, dtype: str):
     df.to_csv(new_path)
     return new_path
 
-def rename_column(data_path: str, old_column_name: str, new_column_name: str):
+def rename_column(data_path: str, rename_dict: dict):
     df = pd.read_csv(f'{data_path}/dataset.csv')
-    df = df.rename(columns={old_column_name: new_column_name})
+    df = df.rename(columns=rename_dict)
     new_path = '/result/dataset.csv'
     df.to_csv(new_path)
     return new_path
@@ -181,6 +188,14 @@ def query_and_save(data_path: str, query: str):
     new_path = '/result/dataset.csv'
     df.to_csv(new_path)
     return new_path
+
+def exec_func(data_path: str, func: str):
+    df = pd.read_csv(f'{data_path}/dataset.csv')
+    exec(func)
+    new_path = '/result/dataset.csv'
+    df.to_csv(new_path)
+    return new_path
+
 
 '''-------------------------------------------------------------------------------------'''
 
@@ -196,10 +211,10 @@ def concat(data_path: str, other_data_path: str, axis: int):
     df.to_csv(new_path)
     return new_path
 
-def merge(data_path: str, other_data_path: str, on: str, how: str):
+def merge(data_path: str, other_data_path: str, left_on: list, right_on: list, how: str):
     df1 = pd.read_csv(f'{data_path}/dataset.csv')
     df2 = pd.read_csv(f'{other_data_path}/dataset.csv')
-    df = pd.merge(df1, df2, on=on, how=how)
+    df = pd.merge(df1, df2, left_on=left_on, right_on=right_on, how=how)
     new_path = '/result/dataset.csv'
     df.to_csv(new_path)
     return new_path

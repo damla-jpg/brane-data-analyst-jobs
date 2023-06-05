@@ -24,16 +24,33 @@ def convert_parameters(parameters):
     return None
   
   for i in range(len(parameters)):
+
+    # Booleans
     if parameters[i] == "True":
       parameters[i] = True
     elif parameters[i] == "False":
       parameters[i] = False
+
+    # Integers
     elif parameters[i].isdigit():
       parameters[i] = int(parameters[i])
+
+    # Floats
     elif parameters[i].replace('.', '', 1).isdigit():
       parameters[i] = float(parameters[i])
+
+    # Lists
+    elif parameters[i][0] == '[' and parameters[i][-1] == ']':
+      parameters[i] = parameters[i][1:-1].split(', ')
+
+    # Dictionaries
+    elif parameters[i][0] == '{' and parameters[i][-1] == '}':
+      parameters[i] = json.loads(parameters[i])
+
+    # Strings
     else:
       parameters[i] = str(parameters[i])
+      
   return parameters
 
 

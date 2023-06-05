@@ -3,3 +3,7 @@ include
 lib
 lib64
 *.cfg
+
+__pycache__
+DS_Store
+
